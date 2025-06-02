@@ -9,9 +9,9 @@ import com.vaadin.flow.router.Route;
 public class SignInView extends VerticalLayout {
 
     private UserController controller;
+    
     public SignIn(UserController controller){
         this.controller = controller;
     }
-
 
 }
