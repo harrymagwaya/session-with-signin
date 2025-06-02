@@ -1,7 +1,10 @@
 package com.signin.signin.repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
+import org.checkerframework.checker.units.qual.s;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -16,9 +19,15 @@ public class UserRepository {
         this.jdbc = jdbc;
     }
 
-    @Override
+    
     public Iterable<User> findAll(){
-        return jdbc.query("Select id, name from Users", );
+        return jdbc.query("Select id, name from Users", this:: mapRowToUser);
+    }
+
+    private User mapRowToUser(ResultSet rs, int row)throws SQLException{
+        return new User(
+            rs.getInt("id"), 
+            rs.getString("name"));
     }
     
 }
