@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 
-@Component
+@Controller
 public class UserController {
 
 
@@ -51,7 +51,7 @@ public class UserController {
         router.navigate(NewUsers.class);
     }
 
-   
+    @PostMapping("/users/add")
     public void addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
         System.out.println("add user");
 
@@ -64,10 +64,10 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public LogInView getLogIn(Model model, HttpServletRequest request, HttpSession session) {
+    public String getLogIn(Model model, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
         if (user == null) {
-            return logInView;
+            return "foward:/login";
         }
         else{
             model.addAttribute("user", user);

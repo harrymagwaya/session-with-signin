@@ -19,7 +19,7 @@ import com.vaadin.flow.router.Route;
 
 
 @Route("/signup")
-public class SignInView extends VerticalLayout implements BeforeEnterObserver{
+public class SignInView extends VerticalLayout{
 
     @Autowired
     private UserController controller;
@@ -30,7 +30,9 @@ public class SignInView extends VerticalLayout implements BeforeEnterObserver{
     private  EmailField emailField; 
     private PasswordField passwordField;
     private PasswordField conField;
+    private Button submiButton;
     private FormLayout formLayout;
+
 
     public SignInView(UserController controller){
         this.controller = controller;
@@ -40,6 +42,11 @@ public class SignInView extends VerticalLayout implements BeforeEnterObserver{
          emailField = new EmailField();
          passwordField = new PasswordField();
          conField = new PasswordField();
+         submiButton = new Button();
+
+         submiButton.addClickListener(e-> handleSubmit());
+
+
 
         formLayout = new FormLayout();
         formLayout.add(firstName,lastName, emailField,passwordField, conField);
@@ -52,13 +59,9 @@ public class SignInView extends VerticalLayout implements BeforeEnterObserver{
         String name = firstName.getValue();
         String SecondName = lastName.getValue();
         String email = emailField.getValue();
-        String pass = passwordField.getValue();
-    }
-
-    @Override
-    public void beforeEnter(BeforeEnterEvent event) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'beforeEnter'");
+        String pass1 = passwordField.getValue();
+        String pass = conField.getValue();
+        
     }
 
 }
