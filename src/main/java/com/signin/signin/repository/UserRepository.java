@@ -4,11 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.checkerframework.checker.units.qual.s;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.google.j2objc.annotations.AutoreleasePool;
 import com.signin.signin.models.User;
 
 public class UserRepository {

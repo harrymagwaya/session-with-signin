@@ -4,14 +4,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import com.signin.signin.models.User;
 import com.signin.signin.repository.UserRepository;
 import com.signin.signin.views.LogInView;
+import com.signin.signin.views.NewUsers;
 import com.signin.signin.views.SignInView;
 import com.signin.signin.views.UserProtectedView;
+import com.vaadin.flow.router.Router;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,45 +27,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 
-@Controller
+@Component
 public class UserController {
 
 
     @Autowired
     private UserRepository userRepository;
 
-    private SignInView signInView;
 
-    private LogInView logInView;
-
-    private UserProtectedView userProtectedView;
+    private Router router;
 
     public UserController(UserRepository userRepository){
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/users/view")
-    public SignInView getAllUserz(Model model) {
+   
+    public void getAllUserz(Model model) {
         System.out.println("getting all users");
 
-        List <User> users = userRepository.findAll();
+       // List <User> users = userRepository.findAll();
 
-        model.addAttribute("us", users);
-        return signInView;
+       // model.addAttribute("us", users);
+        router.navigate(NewUsers.class);
     }
 
-    @PostMapping("path")
-    public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
+   
+    public void addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
         System.out.println("add user");
 
         String newName = newuser.get("name");
         String newPswd = newuser.get("password");
         int newSize = Integer.parseInt(newuser.get("size"));
-        userRepository.
-
+       
         response.setStatus(201);
-
-        
         return "";
     }
 
