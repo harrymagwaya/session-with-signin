@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.signin.signin.models.User;
 
-public class UserRepository {
+public class UserRepository  {
     private JdbcTemplate jdbc;
 
     @Autowired

@@ -41,7 +41,11 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-   
+    @GetMapping("/users")
+    public String getMethodName(@RequestParam String param) {
+        return new String();
+    }
+    
     public void getAllUserz(Model model) {
         System.out.println("getting all users");
 
@@ -52,7 +56,7 @@ public class UserController {
     }
 
     @PostMapping("/users/add")
-    public void addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
+    public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
         System.out.println("add user");
 
         String newName = newuser.get("name");
@@ -60,7 +64,7 @@ public class UserController {
         int newSize = Integer.parseInt(newuser.get("size"));
        
         response.setStatus(201);
-        return "";
+        return "foward:/users/add";
     }
 
     @GetMapping("/login")
@@ -71,8 +75,17 @@ public class UserController {
         }
         else{
             model.addAttribute("user", user);
-            return userProtectedView;
+            return "/login";
         }
     }
+
+    @PostMapping("/login")
+    public String login(@RequestParam Map <String, String> formData, Model model, HttpServletRequest req, HttpSession session) {
+        
+        
+        return entity;
+    }
+    
+    
     
 }
